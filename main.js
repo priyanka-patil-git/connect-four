@@ -3,18 +3,13 @@
     var prefixEl = document.querySelector('#prefix');
     var primaryTextEl = document.querySelector('.primary');
     var secondaryTextEl = document.querySelector('.secondary');
-    var currentPlayerNameEl = document.querySelector('#current-player');
-    var otherPlayerNameEl = document.querySelector('#next-player');
+    
     var playAgainEl = document.querySelector('#play-again');
     var playAgainBtnEl = document.querySelector('#play-again-btn');
     var gameBoardEl = document.querySelector('#board');
   
     playAgainBtnEl.addEventListener('click', () => location.reload());
     gameBoardEl.addEventListener('click', placeGamePiece);
-    currentPlayerNameEl.addEventListener("keydown", Game.do.handleNameChange);
-    otherPlayerNameEl.addEventListener("keydown", Game.do.handleNameChange);
- 
-
 
     function placeGamePiece(e) {
       if (e.target.tagName !== 'BUTTON') return;
@@ -31,12 +26,14 @@
       y_pos = Game.do.dropToBottom(x_pos, y_pos);
   
       if (Game.check.isPositionTaken(x_pos, y_pos)) {
-        alert(Game.config.takenMsg);
-        // Swal.fire(
-        //   Game.config.takenMsg,
-        //   'You clicked the button!',
-        //   'success'
-        // );
+        //alert(Game.config.takenMsg);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: Game.config.takenMsg,
+          height:100,
+          width:300,
+        })
         return;
       }
   
